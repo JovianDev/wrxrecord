@@ -12,7 +12,7 @@ import {
 const RecordContainer = (props) => {
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Button variant="contained" color="primary">
+      <Button item variant="contained" color="primary">
         Add Record
       </Button>
 

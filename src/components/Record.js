@@ -15,10 +15,10 @@ const Record = (props) => {
   return (
     <Grid>
       <Paper elevation={4}>
-        <Card minwidth="md" varient="outlined">
+        <Card minwidth="lg" varient="outlined">
           <CardContent>
             <Typography variant="h5" component="h2">
-              Record 6/13/21
+              Date Completed 6/13/21
             </Typography>
             record stuff
           </CardContent>

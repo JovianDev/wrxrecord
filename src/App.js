@@ -8,10 +8,10 @@ import Register from './components/Register';
 const App = (props) => {
   return (
     <div className="router">
-      <h1> WRX RECORD!! </h1>
       <main>
         <Switch>
           <Route exact path="/" component={MainDisplay} />
+          //
           <Route exact path="/login" component={SignIn} />
           <Route exact path="/user" component={Register} />
           {/* <Route exact path="/create" component={CreateRecord} /> */}

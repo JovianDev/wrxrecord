@@ -43,15 +43,19 @@ vehicleController.getVehicle = async (req, res, next) => {
     return next(new Error({ msg: 'user needs to log in' }));
   }
   const { ssid } = req.cookies;
+  console.log('SSID IN GETWRX ', ssid);
   try {
     const wrx = await Vehicle.findOne({ owner_id: ssid });
     console.log('WRX IN ßGETWRX ', wrx);
 
-    if (!wrx) return next(new Error({ msg: 'could not get wrx data' }));
+    if (!wrx) {
+      console.log('I am in this if');
+      return next(new Error({ msg: 'could not get wrx data' }));
+    }
     res.locals.wrx = wrx;
     return next();
-  } catch {
-    (e) => console.log(e.message);
+  } catch (e) {
+    console.log(e.message);
   }
 };
 

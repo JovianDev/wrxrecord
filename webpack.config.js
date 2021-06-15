@@ -10,20 +10,20 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
     filename: 'bundle.js',
   },
   devtool: 'eval-source-map',
-  mode: 'development',
+  mode: 'production',
   devServer: {
-    host: 'localhost',
-    port: 8080,
+    // host: 'localhost',
+    // port: 8080,
     // match the output path
-    contentBase: path.resolve(__dirname, 'dist'),
+    // publicPath: path.resolve(__dirname, '/'),
+    publicPath: '/',
     // enable HMR on the devServer
     hot: true,
     // match the output 'publicPath'
-    publicPath: '/',
+    // publicPath: '/dist',
     // fallback to root for other urls
     historyApiFallback: true,
 
@@ -37,16 +37,12 @@ module.exports = {
      * to localhost:3000/api/* (where our Express server is running)
      */
     proxy: {
-      '/api/': {
-        target: 'http://localhost:3000/',
-        // pathRewrite: { '^/api': '' },
-        secure: false,
-        changeOrigin: true,
-      },
-      //   '/assets/**': {
-      //     target: 'http://localhost:3000/',
-      //     secure: false,
-      //   },
+      '/api': 'http://localhost:3000',
+      // '/api/**': {
+      //   target: 'http://localhost:3000/',
+      //   // pathRewrite: { '^/api': '' },
+      // secure: false,
+      // changeOrigin: true,
     },
   },
   module: {
