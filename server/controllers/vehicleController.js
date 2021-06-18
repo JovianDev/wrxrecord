@@ -97,6 +97,37 @@ vehicleController.createRecord = async (req, res, next) => {
     (e) => console.log(e.message);
   }
 };
+vehicleController.deleteRecord = async (req, res, next) => {
+  console.log('REQ BODY ', req.body);
+  if (!req.body.props) {
+    return next(
+      new Error({ msg: 'Please enter at least date and maintence type' })
+    );
+  }
+  console.log('REQ COOKIE ', req.cookies.ssid);
+  try {
+    console.log('inside RECORD DELETE');
+    const newRecord = await Vehicle.findOneAndUpdate(
+      { owner_id: req.cookies.ssid },
+      {
+        $pull: {
+          record: {
+            date: req.body.props.date,
+            milage: req.body.props.milage,
+            type: req.body.props.type,
+          },
+        },
+      }
+    );
+    if (!newRecord) {
+      return next(new Error({ msg: 'unknown error saving record' }));
+    }
+    res.locals.record = newRecord;
+    return next();
+  } catch {
+    (e) => console.log(e.message);
+  }
+};
 
 vehicleController.getUserData = async (req, res, next) => {
   try {

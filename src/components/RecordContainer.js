@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Record from './Record';
+import { v4 as uuid } from 'uuid';
 import {
   CardHeader,
   Card,
@@ -11,6 +12,7 @@ import {
 import api from '../axios';
 
 const RecordContainer = (props) => {
+  console.log('RECORD CONTAINER ', props);
   const [records, setRecords] = useState([]);
   useEffect(() => {
     api
@@ -18,6 +20,7 @@ const RecordContainer = (props) => {
       .then((resData) => {
         console.log('RES DATA ', resData);
         const { record } = resData.data;
+        record.reverse();
         console.log('RECORD ARRAY ', record);
         setRecords(record);
       })
@@ -26,12 +29,9 @@ const RecordContainer = (props) => {
   console.log(records);
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Button item variant="contained" color="primary">
-        Add Record
-      </Button>
       {records &&
         records.map((record) => {
-          return <Record {...record} />;
+          return <Record {...record} key={uuid()} />;
         })}
 
       {/* prop.record.map((el) =>

@@ -54,5 +54,9 @@ router.post('/addwrx', vehicleController.createVehicle, (req, res) => {
 router.post('/addrecord', vehicleController.createRecord, (req, res) => {
   res.status(200).json(res.locals.record);
 });
+//delete record
+router.post('/deleterecord', vehicleController.deleteRecord, (req, res) => {
+  res.status(200).json(res.locals.record);
+});
 
 module.exports = router;

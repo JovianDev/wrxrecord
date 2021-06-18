@@ -53,7 +53,7 @@ const vehicleSchema = new Schema({
     type: Array,
     default: [
       {
-        date: { type: Date, default: Date.now },
+        date: Date,
         milage: Number,
         type: String,
         oil_type: String,

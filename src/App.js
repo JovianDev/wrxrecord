@@ -11,7 +11,6 @@ const App = (props) => {
       <main>
         <Switch>
           <Route exact path="/" component={MainDisplay} />
-          //
           <Route exact path="/login" component={SignIn} />
           <Route exact path="/user" component={Register} />
           {/* <Route exact path="/create" component={CreateRecord} /> */}
