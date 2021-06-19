@@ -43,42 +43,42 @@ const MainDisplay = () => {
   });
   const classes = useStyles();
   return (
-    <Grid
-      container
-      maxwidth="lg"
-      className="mainContainer"
-      style={{ backgroundColor: 'white' }}
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
-      <Grid item>
-        <MenuNav />
+    <div>
+      <MenuNav />
+      <Grid
+        container
+        maxwidth="lg"
+        className="mainContainer"
+        style={{ backgroundColor: 'white' }}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item xs={6}>
+          <img src="https://i.imgur.com/eZMchpK.png" />
+        </Grid>
+        <Grid xs={6} item bgcolor="#282828">
+          <VehicleDisplay style={{ outline: '4px black solid' }} />
+        </Grid>
+        <div>
+          {/* <button onClick={handleOpen}>Add record</button> */}
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            startIcon={<BuildIcon />}
+            // onClick={handleOpen}
+            onClick={handleOpen}
+          >
+            Add Record
+          </Button>
+        </div>
+        <ModalDialog open={addRecOpen} handleClose={handleClose} />
+        <Grid item xs={6}>
+          <RecordContainer />
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <img src="https://i.imgur.com/eZMchpK.png" />
-      </Grid>
-      <Grid xs={6} item bgcolor="#282828">
-        <VehicleDisplay style={{ outline: '4px black solid' }} />
-      </Grid>
-      <div>
-        {/* <button onClick={handleOpen}>Add record</button> */}
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          startIcon={<BuildIcon />}
-          // onClick={handleOpen}
-          onClick={handleOpen}
-        >
-          Add Record
-        </Button>
-      </div>
-      <ModalDialog open={addRecOpen} handleClose={handleClose} />
-      <Grid item xs={6}>
-        <RecordContainer />
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 export default MainDisplay;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
+import api from '../axios';
 
 function Copyright() {
   return (
@@ -47,19 +49,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  let history = useHistory();
+  const loggedIn = () => {
+    history.push('/');
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    api({
+      method: 'post',
+      url: '/login',
+      data: {
+        email,
+        password,
+      },
+    }).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        loggedIn();
+      }
+    });
+  };
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <div>
+          <img src="https://i.imgur.com/3KJ3ZCN.png" />
+        </div>
+        {/* <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
-        </Avatar>
+        </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,16 +97,8 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="User-name"
-            name="username"
-            autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -88,9 +107,10 @@ export default function SignIn() {
             fullWidth
             name="password"
             label="Password"
-            type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

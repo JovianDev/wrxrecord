@@ -131,6 +131,7 @@ export default function PrimarySearchAppBar() {
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             WRX Record
+            {/* <img src="https://i.imgur.com/k5sT2It.png" />{' '} */}
           </Typography>
 
           <div className={classes.grow} />

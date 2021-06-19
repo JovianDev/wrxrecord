@@ -25,6 +25,7 @@ router.post(
   cookieController.setSSIDCookie,
   sessionController.startSession,
   (req, res) => {
+    console.log('end of route');
     res.status(200).redirect('/');
   }
 );

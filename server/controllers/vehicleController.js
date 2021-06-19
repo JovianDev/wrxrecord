@@ -98,8 +98,9 @@ vehicleController.createRecord = async (req, res, next) => {
   }
 };
 vehicleController.deleteRecord = async (req, res, next) => {
-  console.log('REQ BODY ', req.body);
-  if (!req.body.props) {
+  console.log('REQ BODY ', req.body.data);
+  console.log('REQ cookies', req.cookies);
+  if (!req.body.data) {
     return next(
       new Error({ msg: 'Please enter at least date and maintence type' })
     );
@@ -112,9 +113,9 @@ vehicleController.deleteRecord = async (req, res, next) => {
       {
         $pull: {
           record: {
-            date: req.body.props.date,
-            milage: req.body.props.milage,
-            type: req.body.props.type,
+            date: req.body.data.date,
+            milage: req.body.data.milage,
+            type: req.body.data.type,
           },
         },
       }

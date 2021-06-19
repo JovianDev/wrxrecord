@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -16,17 +16,19 @@ import api from '../axios';
 const Record = (props) => {
   console.log('PROPS AT TOP ', props, 'KEY', props.key);
 
-  const handleDelete = (...props) => {
-    console.log('DELETE PROPS', props);
-    api({
-      method: 'post',
-      url: '/deleterecord',
-      data: {
-        date: '6/16/2021',
-        milage: props.milage,
-        type: props.type,
-      },
-    })
+  const [date, setDate] = useState('');
+  const [milage, setMilage] = useState(props.milage);
+  const [type, setType] = useState(props.type);
+
+  const handleDelete = () => {
+    const arrReq = {
+      date: '6/18/2021',
+      milage: milage,
+      type: type,
+    };
+    console.log('DELETE PROPS', milage, type);
+    api
+      .put('/deleterecord', arrReq)
       .then((res) => {
         console.log('DELETE RESPONSE ', res.data);
       })

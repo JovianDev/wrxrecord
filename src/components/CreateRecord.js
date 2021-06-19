@@ -65,12 +65,12 @@ const CreateRecord = ({ handleClose }) => {
   // };
   const useStyles = makeStyles((theme) => ({
     container: {
-      margin: 20,
+      padding: 10,
     },
     root: {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       alignItems: 'center',
       padding: theme.spacing(2),
 
@@ -84,6 +84,10 @@ const CreateRecord = ({ handleClose }) => {
         margin: theme.spacing(2),
       },
     },
+    textField: {
+      marginLeft: 10,
+      marginRight: 10,
+    },
   }));
   const classes = useStyles();
   return (
@@ -92,6 +96,7 @@ const CreateRecord = ({ handleClose }) => {
         <DatePicker onChange={(e) => setDate(e.target.value)} />
 
         <TextField
+          className={classes.textField}
           label="Milage"
           variant="outlined"
           required

@@ -5,18 +5,19 @@ const userController = {};
 
 //createUser creates new user when they register
 userController.createUser = async (req, res, next) => {
-  //   const { username, password, model_year, wrx_type, color, vin, milage } =
-  //     req.body;
-  if (!username || !password) {
+  const { username, email, password } = req.body;
+  if (!email || !username || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
   //   check existing user
   const existingUser = await User.findOne({ username });
   console.log('EXISTING USER =>> ', existingUser);
-  if (existingUser) return res.status(400).json({ msg: 'User already exists' });
+  if (existingUser)
+    return res.status(400).json({ msg: 'Username already exists' });
 
   try {
     const newUser = await User.create({
+      email: email,
       username: username,
       password: password,
     });
@@ -31,16 +32,16 @@ userController.createUser = async (req, res, next) => {
 };
 
 userController.verifyUser = async (req, res, next) => {
-  console.log('REQBODY VERIFY=>>', req.body.username);
+  console.log('REQBODY VERIFY=>>', req.body.email);
   try {
     //check to make sure both field are filled out, if not throw
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
       res.redirect('/login');
       return next(new Error('Please enter valid username and password'));
     }
     //find user document by searching for unique username
     const user = await User.findOne({
-      username: req.body.username,
+      email: req.body.email,
     });
 
     if (!user) {
